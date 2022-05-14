@@ -56,7 +56,16 @@ dependencies {
 
     implementation("io.insert-koin:koin-core:3.1.6")
     implementation("keechma:router:1.0.3")
+    implementation("se.codeunlimited.android.bitmap_utils:android-bitmap-utils:0.4")
     testImplementation("io.insert-koin:koin-test:3.1.6")
+
+    //COIL
+    //implementation("io.coil-kt:coil-compose:2.0.0-rc02")
+
+    //implementation("com.github.skydoves:landscapist-coil:1.5.1")
+
+    //PAGER
+    //implementation("com.google.accompanist:accompanist-pager:0.23.1")
 
 }
 

@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.singleWindowApplication
-import pab.lop.illustrashopandroid.ui.view.main.composables.Main
+import view.main.composables.Main
 import view.login_register.composables.Login
 import theme.IllustraShopAndroidTheme
 

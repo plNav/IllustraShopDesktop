@@ -1,4 +1,4 @@
-package pab.lop.illustrashopandroid.ui.view.main.composables
+package view.main.composables
 
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -9,6 +9,8 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import kotlinx.coroutines.CoroutineScope
 import pab.lop.illustrashopandroid.data.model.product_stock.product_stock_response
+import pab.lop.illustrashopandroid.ui.view.main.composables.Body
+import pab.lop.illustrashopandroid.ui.view.main.composables.MainDrawer
 import view.main.MainViewModel
 import pab.lop.illustrashopandroid.utils.*
 import theme.Spacing
@@ -125,7 +127,7 @@ fun MainStart(
             )
         },
         topBar = {
-            view.main.composables.TopAppBar(
+            TopAppBar(
                 verticalGradient = verticalGradient,
                 scope = scope,
                 scaffoldState = scaffoldState,
@@ -134,7 +136,7 @@ fun MainStart(
             )
         }
     ) {
-      //  Body(familyProducts, popUpDetailsOpen)
+        Body(familyProducts, popUpDetailsOpen)
     }
 }
 
