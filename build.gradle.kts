@@ -14,10 +14,50 @@ repositories {
     google()
     mavenCentral()
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    maven {
+        url = uri("https://repo.clojars.org")
+        name = "Clojars"
+    }
+    maven {
+        url = uri("https://repo.clojars.org")
+        name = "Clojars"
+    }
+    maven {
+        url = uri("https://repo.clojars.org")
+        name = "Clojars"
+    }
 }
 
 dependencies {
     implementation(compose.desktop.currentOs)
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.3.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1-native-mt")
+
+    implementation("com.google.code.gson:gson:2.9.0")
+
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:adapter-rxjava:2.9.0")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
+
+    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.21")
+
+    implementation("io.ktor:ktor-client-core:2.0.1")
+    implementation("io.ktor:ktor-client-cio:2.0.1")
+    implementation("io.ktor:ktor-client-json:2.0.1")
+    implementation("io.ktor:ktor-client-logging:2.0.1")
+    implementation("io.ktor:ktor-client-serialization:2.0.1")
+
+    implementation("co.touchlab:kermit:1.1.1")
+
+    implementation("io.insert-koin:koin-core:3.1.6")
+    implementation("keechma:router:1.0.3")
+    testImplementation("io.insert-koin:koin-test:3.1.6")
+
 }
 
 tasks.withType<KotlinCompile>() {
