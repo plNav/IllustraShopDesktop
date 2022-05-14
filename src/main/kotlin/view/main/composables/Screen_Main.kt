@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import pab.lop.illustrashopandroid.data.model.product_stock.product_stock_response
 import pab.lop.illustrashopandroid.ui.view.main.composables.Body
 import pab.lop.illustrashopandroid.ui.view.main.composables.MainDrawer
+import pab.lop.illustrashopandroid.ui.view.main.composables.PopUpDetails
 import view.main.MainViewModel
 import pab.lop.illustrashopandroid.utils.*
 import theme.Spacing
@@ -83,21 +84,17 @@ fun Main(
             screen = screen
         )
 
-   /* if (popUpDetailsOpen.value) {
+    if (popUpDetailsOpen.value) {
         PopUpDetails(
-            mainViewModel = mainViewModel,
             scope = scope,
             popUpDetailsOpen = popUpDetailsOpen,
-            customSpacing = customSpacing,
             verticalGradient = verticalGradient,
-            snackbarHostState = snackbarHostState,
             addShoppingCart = addShoppingCart,
-            context = context,
             verticalGradientDisabled = verticalGradientDisabled,
             isWishList = false,
-            navController = navController
+            screen = screen
         )
-    }*/
+    }
 }
 
 

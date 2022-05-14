@@ -39,7 +39,6 @@ import theme.Spacing
 @Composable
 fun Login(screen: MutableState<String>) {
 
-    val context = rememberCompositionContext()
     val verticalGradient = Brush.verticalGradient(
         colors = listOf(MaterialTheme.colors.primary, MaterialTheme.colors.primaryVariant),
         startY = 0f,
