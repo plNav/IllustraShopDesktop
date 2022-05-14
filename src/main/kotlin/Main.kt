@@ -15,8 +15,8 @@ import view.login_register.composables.Login
 import theme.IllustraShopAndroidTheme
 import utils.Toast
 
-private val message: MutableState<String> = mutableStateOf("")
-private val state: MutableState<Boolean> = mutableStateOf(false)
+ val message: MutableState<String> = mutableStateOf("")
+ val state: MutableState<Boolean> = mutableStateOf(false)
 
 @Composable
 fun App() {

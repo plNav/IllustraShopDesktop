@@ -29,9 +29,11 @@ import androidx.compose.ui.text.input.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import message
 import pab.lop.illustrashopandroid.ui.view.login_register.LoginRegisterViewModel
 import pab.lop.illustrashopandroid.utils.shoppingCartSelected
 import pab.lop.illustrashopandroid.utils.userSelected
+import state
 import theme.Spacing
 
 
@@ -267,6 +269,9 @@ fun validateLoginClick(
                 loginRegisterViewModel.getShoppingCartFromUser(userSelected!!._id){
                     shoppingCartSelected = loginRegisterViewModel.currentShoppingCartResponse.value
                     screen.value = ScreenNav.MainScreen.route
+                    message.value = "hola"
+                    state.value = true
+
                 }
             }
         }, onFailureCallback = {
