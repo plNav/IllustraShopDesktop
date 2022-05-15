@@ -29,17 +29,20 @@ import androidx.compose.ui.text.input.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import message
-import pab.lop.illustrashopandroid.ui.view.login_register.LoginRegisterViewModel
+import view.login_register.LoginRegisterViewModel
 import pab.lop.illustrashopandroid.utils.shoppingCartSelected
 import pab.lop.illustrashopandroid.utils.userSelected
-import state
+import showToast
 import theme.Spacing
+import utils.Toast
+
+
 
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun Login(screen: MutableState<String>) {
+
 
     val verticalGradient = Brush.verticalGradient(
         colors = listOf(MaterialTheme.colors.primary, MaterialTheme.colors.primaryVariant),
@@ -258,7 +261,8 @@ fun validateLoginClick(
     screen: MutableState<String>
 ) {
     if(email.value.isEmpty() || password.value.isEmpty()){
-        //TODO TOAST
+        showToast("User and Password can't be empty")
+
     }
     else {
         val loginRegisterViewModel = LoginRegisterViewModel()
@@ -269,9 +273,7 @@ fun validateLoginClick(
                 loginRegisterViewModel.getShoppingCartFromUser(userSelected!!._id){
                     shoppingCartSelected = loginRegisterViewModel.currentShoppingCartResponse.value
                     screen.value = ScreenNav.MainScreen.route
-                    message.value = "hola"
-                    state.value = true
-
+                    showToast("Logged as ${userSelected!!.username}")
                 }
             }
         }, onFailureCallback = {

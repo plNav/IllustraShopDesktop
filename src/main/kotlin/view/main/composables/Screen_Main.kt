@@ -11,7 +11,6 @@ import kotlinx.coroutines.CoroutineScope
 import pab.lop.illustrashopandroid.data.model.product_stock.product_stock_response
 import pab.lop.illustrashopandroid.ui.view.main.composables.Body
 import pab.lop.illustrashopandroid.ui.view.main.composables.MainDrawer
-import pab.lop.illustrashopandroid.ui.view.main.composables.PopUpDetails
 import view.main.MainViewModel
 import pab.lop.illustrashopandroid.utils.*
 import theme.Spacing
@@ -19,7 +18,7 @@ import theme.Spacing
 
 @Composable
 fun Main(
-    screen: MutableState<String>
+    screen: MutableState<String>,
 ) {
     val loadProductsFamily = remember { mutableStateOf(false) }
     val startLoading = remember { mutableStateOf(false) }
@@ -31,7 +30,6 @@ fun Main(
 
     val mainViewModel = MainViewModel()
     val customSpacing = Spacing.customSpacing
-
 
 
     if (userSelected == null) {

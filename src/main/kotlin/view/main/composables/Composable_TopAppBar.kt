@@ -18,7 +18,10 @@ import pab.lop.illustrashopandroid.utils.currentShoppingProducts
 import pab.lop.illustrashopandroid.utils.shoppingCartSelected
 import pab.lop.illustrashopandroid.utils.userDefaultNoAuth
 import pab.lop.illustrashopandroid.utils.userSelected
+import showToast
+
 import view.main.MainViewModel
+
 
 @Composable
 fun TopAppBar(
@@ -29,6 +32,8 @@ fun TopAppBar(
     screen : MutableState<String>
 
 ) {
+
+
     val mainViewModel = MainViewModel()
     TopAppBar(
         elevation = 0.dp,
@@ -53,12 +58,12 @@ fun TopAppBar(
         actions = {
             IconButton(
                 onClick = {
-                    if (userSelected == userDefaultNoAuth) {/*TODO TOAST*/ }
+                    if (userSelected == userDefaultNoAuth) {showToast("Not Logged") }
                     else mainViewModel.getAllProductShopping(shoppingCartSelected!!._id) {
                         currentShoppingProducts = mainViewModel.currentProductsShopping.toMutableList()
                         var hasToBuy = false
                         currentShoppingProducts.forEach{product -> if(!product.bought)hasToBuy = true }
-                        if (currentShoppingProducts.isEmpty() || !hasToBuy) {/*TODO TOAST*/}
+                        if (currentShoppingProducts.isEmpty() || !hasToBuy) {showToast("Shopping Cart Empty")}
                         else screen.value = ScreenNav.LoginScreen.route
                     }
                 }

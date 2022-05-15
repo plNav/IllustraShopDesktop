@@ -6,8 +6,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.singleWindowApplication
 import view.main.composables.Main
@@ -15,8 +17,13 @@ import view.login_register.composables.Login
 import theme.IllustraShopAndroidTheme
 import utils.Toast
 
- val message: MutableState<String> = mutableStateOf("")
- val state: MutableState<Boolean> = mutableStateOf(false)
+val message: MutableState<String> = mutableStateOf("")
+val state: MutableState<Boolean> = mutableStateOf(false)
+
+fun showToast(msg : String){
+     message.value = msg
+    state.value = true
+}
 
 @Composable
 fun App() {
@@ -33,10 +40,12 @@ fun App() {
         }
     }
 }
-
 fun main() = singleWindowApplication(
     title = "IlustraShop Desktop",
-    state = WindowState(size = DpSize(800.dp, 800.dp))
+    state = WindowState(
+        size = DpSize(1280.dp, 920.dp),
+        position = WindowPosition(alignment = Alignment.Center)
+    )
 ){
         App()
 }

@@ -1,4 +1,4 @@
-package pab.lop.illustrashopandroid.ui.view.main.composables
+package view.main.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,15 +21,15 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowPosition
+import androidx.compose.ui.window.rememberWindowState
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 import pab.lop.illustrashopandroid.data.model.product_shopping.product_shopping_request
-import pab.lop.illustrashopandroid.ui.theme.SurfaceAlmostWhite
 import pab.lop.illustrashopandroid.utils.*
+import showToast
 import theme.Spacing
 import utils.AsyncImage
-import utils.Toast
 import utils.loadImageBitmap
 import view.main.MainViewModel
 
@@ -44,6 +44,8 @@ fun PopUpDetails(
     isWishList: Boolean,
     screen : MutableState<String>
 ) {
+
+
     val mainViewModel = MainViewModel()
     val customSpacing = Spacing.customSpacing
     val context = rememberCompositionContext()
@@ -56,19 +58,44 @@ fun PopUpDetails(
 
     val isInWishList = remember { mutableStateOf(userSelected!!.wishlist.contains(productSelected!!._id)) }
 
+/*    AlertDialog(onDismissRequest = {},
+        title = {
+            Text("A title")
+        },
+        text = {
+            Text("A text")
+        },
+        confirmButton = {
+            Button(onClick = {}) {
+                Text("A button")
+            }
+        },
+    )*/
 
-    Dialog(onCloseRequest = { popUpDetailsOpen.value = false }, undecorated = true){
+
+    Window(
+        onCloseRequest = { popUpDetailsOpen.value = false },
+        state = rememberWindowState(
+            width = 500.dp,
+            height = 1000.dp,
+            position = WindowPosition(alignment = Alignment.Center)
+        ),
+        title = "Adaptive",
+        resizable = false,
+        undecorated = true,
+        transparent = true,
+        alwaysOnTop = true,
+        focusable = true
+    ) {
         Surface(
-            modifier = Modifier
-                .padding(customSpacing.small)
-                .height(800.dp),
-            shape = RoundedCornerShape(5.dp),
-            color = Color.White
+            shape = RoundedCornerShape(10.dp),
+            color = Color.Transparent,
         ) {
             Column(
                 modifier = Modifier
-                    .wrapContentHeight()
                     .background(brush = verticalGradient)
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(verticalGradient)
             ) {
                 Row(
                     modifier = Modifier
@@ -116,14 +143,13 @@ fun PopUpDetails(
                         .clickable(onClick = {
                             var isRepeated = false
                             if (userSelected == userDefaultNoAuth) {
-                                //Toast("Login Needed")
+                                showToast("Login Needed")
                             } else {
                                 if (currentShoppingProducts.isEmpty()) {
                                     createProductShopping(
                                         mainViewModel,
                                         addShoppingCart,
                                         popUpDetailsOpen,
-                                        scope,
                                     )
                                 } else {
                                     for (product in currentShoppingProducts) {
@@ -140,12 +166,11 @@ fun PopUpDetails(
                                             mainViewModel,
                                             addShoppingCart,
                                             popUpDetailsOpen,
-                                            scope,
                                         )
                                     } else {
                                         addShoppingCart.value = true
                                         popUpDetailsOpen.value = false
-                                        //Toast("Product Added")
+                                        showToast("Product added to shopping cart")
                                     }
                                 }
                             }
@@ -176,11 +201,12 @@ fun PopUpDetails(
                                     mainViewModel.getAllProductStock(userSelected!!.wishlist) {
                                         wishlistProducts = mainViewModel.productListResponse
                                         //navController.navigate(ScreenNav.WishScreen.route)
+                                        showToast("Added to wishlist")
                                     }
                                 }
                             } else {
                                 if (userSelected!! == userDefaultNoAuth) {
-                                   //Toast("Not Logged")
+                                   showToast("Not Logged")
                                 } else {
                                     if (!isInWishList.value) {
                                         userSelected!!.wishlist.add(productSelected!!._id)
@@ -188,7 +214,8 @@ fun PopUpDetails(
                                             popUpDetailsOpen.value = false
                                         }
                                     } else {
-                                      //  Toast("Already in WishList")
+
+                                      showToast("Already in WishList")
                                     }
                                 }
                             }
@@ -206,7 +233,7 @@ fun PopUpDetails(
                                 else verticalGradient
                             )
                             .padding(12.dp),
-                        text = "", //if (isWishList) stringResource(R.string.delete_wishlist) else stringResource(R.string.addWish),
+                        text =  if (isWishList)"Delete product from wishlist" else "Add to wishlist",
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.body1.copy(color = Color.White)
                     )
@@ -221,7 +248,6 @@ private fun createProductShopping(
     mainViewModel: MainViewModel,
     addShoppingCart: MutableState<Boolean>,
     popUpDetailsOpen: MutableState<Boolean>,
-    scope: CoroutineScope,
 ) {
     val product = product_shopping_request(
         id_shopping_cart = shoppingCartSelected!!._id,
@@ -236,7 +262,7 @@ private fun createProductShopping(
         currentShoppingProducts.add(mainViewModel.currentProductShoppingResponse!!)
         addShoppingCart.value = true
         popUpDetailsOpen.value = false
-        //Toast("Product Added to Shopping Cart")
+        showToast("Product Added to Shopping Cart")
     }
 }
 

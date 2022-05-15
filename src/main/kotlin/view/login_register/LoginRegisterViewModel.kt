@@ -1,4 +1,4 @@
-package pab.lop.illustrashopandroid.ui.view.login_register
+package view.login_register
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
