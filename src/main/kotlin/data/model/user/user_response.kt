@@ -1,4 +1,4 @@
-package pab.lop.illustrashopandroid.data.model.user
+package data.model.user
 
 import java.util.*
 

@@ -1,11 +1,11 @@
 package utils
 
-import pab.lop.illustrashopandroid.data.model.family.family_response
-import pab.lop.illustrashopandroid.data.model.order.order_response
-import pab.lop.illustrashopandroid.data.model.product_shopping.product_shopping_response
-import pab.lop.illustrashopandroid.data.model.product_stock.product_stock_response
-import pab.lop.illustrashopandroid.data.model.shopping_cart.shopping_cart_response
-import pab.lop.illustrashopandroid.data.model.user.user_response
+import data.model.family.family_response
+import data.model.order.order_response
+import data.model.product_shopping.product_shopping_response
+import data.model.product_stock.product_stock_response
+import data.model.shopping_cart.shopping_cart_response
+import data.model.user.user_response
 import java.util.*
 import kotlin.collections.HashMap
 

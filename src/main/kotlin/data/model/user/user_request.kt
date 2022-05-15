@@ -1,6 +1,4 @@
-package pab.lop.illustrashopandroid.data.model.user
-
-import java.util.*
+package data.model.user
 
 data class user_request(
     var name : String,

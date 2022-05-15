@@ -1,4 +1,4 @@
-package pab.lop.illustrashopandroid.ui.theme
+package theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

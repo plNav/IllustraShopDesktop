@@ -1,4 +1,4 @@
-package pab.lop.illustrashopandroid.ui.view.login_register.composables
+package view.login_register.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,10 +26,6 @@ import theme.Spacing
 import utils.isEditionMode
 import utils.userSelected
 import view.login_register.LoginRegisterViewModel
-import view.login_register.composables.BasicInfo
-import view.login_register.composables.PayInfo
-import view.login_register.composables.PopUpPassword
-import view.login_register.composables.RegisterButton
 
 
 @OptIn(ExperimentalComposeUiApi::class)

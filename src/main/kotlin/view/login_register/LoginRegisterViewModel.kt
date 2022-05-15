@@ -7,10 +7,10 @@ import androidx.compose.runtime.setValue
 
 import data.api.ApiServices
 import kotlinx.coroutines.*
-import pab.lop.illustrashopandroid.data.model.shoppin.shopping_cart_request
-import pab.lop.illustrashopandroid.data.model.shopping_cart.shopping_cart_response
-import pab.lop.illustrashopandroid.data.model.user.user_request
-import pab.lop.illustrashopandroid.data.model.user.user_response
+import data.model.shopping_cart.shopping_cart_request
+import data.model.shopping_cart.shopping_cart_response
+import data.model.user.user_request
+import data.model.user.user_response
 import utils.getSHA256
 import retrofit2.Response
 

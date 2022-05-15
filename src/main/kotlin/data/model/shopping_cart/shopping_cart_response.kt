@@ -1,4 +1,4 @@
-package pab.lop.illustrashopandroid.data.model.shopping_cart
+package data.model.shopping_cart
 
 data class shopping_cart_response (
     val _id : String,

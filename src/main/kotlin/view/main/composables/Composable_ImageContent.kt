@@ -11,7 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.unit.dp
-import pab.lop.illustrashopandroid.data.model.product_stock.product_stock_response
+import data.model.product_stock.product_stock_response
 import utils.URL_HEAD_IMAGES
 import utils.productSelected
 

@@ -8,9 +8,7 @@ import androidx.compose.ui.graphics.*
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import kotlinx.coroutines.CoroutineScope
-import pab.lop.illustrashopandroid.data.model.product_stock.product_stock_response
-import pab.lop.illustrashopandroid.ui.view.main.composables.Body
-import pab.lop.illustrashopandroid.ui.view.main.composables.MainDrawer
+import data.model.product_stock.product_stock_response
 import view.main.MainViewModel
 import theme.Spacing
 import utils.*

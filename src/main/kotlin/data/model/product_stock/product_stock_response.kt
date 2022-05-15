@@ -1,4 +1,4 @@
-package pab.lop.illustrashopandroid.data.model.product_stock
+package data.model.product_stock
 
 data class product_stock_response (
     val _id : String,

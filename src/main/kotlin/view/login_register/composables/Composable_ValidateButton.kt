@@ -23,8 +23,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import pab.lop.illustrashopandroid.data.model.shoppin.shopping_cart_request
-import pab.lop.illustrashopandroid.data.model.user.user_request
+import data.model.shopping_cart.shopping_cart_request
+import data.model.user.user_request
 import showToast
 import theme.Spacing
 import utils.getSHA256

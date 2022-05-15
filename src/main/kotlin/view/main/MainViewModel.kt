@@ -9,12 +9,12 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import pab.lop.illustrashopandroid.data.model.order.order_request
-import pab.lop.illustrashopandroid.data.model.product_shopping.product_shopping_request
-import pab.lop.illustrashopandroid.data.model.product_shopping.product_shopping_response
-import pab.lop.illustrashopandroid.data.model.user.user_response
-import pab.lop.illustrashopandroid.data.model.product_stock.product_stock_response
-import pab.lop.illustrashopandroid.data.model.shopping_cart.shopping_cart_response
+import data.model.order.order_request
+import data.model.product_shopping.product_shopping_request
+import data.model.product_shopping.product_shopping_response
+import data.model.user.user_response
+import data.model.product_stock.product_stock_response
+import data.model.shopping_cart.shopping_cart_response
 import retrofit2.Response
 
 @OptIn(DelicateCoroutinesApi::class)

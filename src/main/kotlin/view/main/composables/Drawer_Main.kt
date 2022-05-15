@@ -1,4 +1,4 @@
-package pab.lop.illustrashopandroid.ui.view.main.composables
+package view.main.composables
 
 
 import ScreenNav

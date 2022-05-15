@@ -1,7 +1,7 @@
-package pab.lop.illustrashopandroid.data.model.order
+package data.model.order
 
-import pab.lop.illustrashopandroid.data.model.product_shopping.product_shopping_response
-import pab.lop.illustrashopandroid.data.model.user.user_response
+import data.model.product_shopping.product_shopping_response
+import data.model.user.user_response
 import java.util.*
 
 data class order_response(

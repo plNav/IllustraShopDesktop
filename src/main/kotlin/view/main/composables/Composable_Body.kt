@@ -1,4 +1,4 @@
-package pab.lop.illustrashopandroid.ui.view.main.composables
+package view.main.composables
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -16,10 +16,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-import pab.lop.illustrashopandroid.data.model.product_stock.product_stock_response
+import data.model.product_stock.product_stock_response
 
 import utils.excludedFamilies
-import view.main.composables.ImageContent
 
 @Composable
 fun Body(

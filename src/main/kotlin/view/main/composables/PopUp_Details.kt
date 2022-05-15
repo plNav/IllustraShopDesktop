@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
-import pab.lop.illustrashopandroid.data.model.product_shopping.product_shopping_request
+import data.model.product_shopping.product_shopping_request
 import showToast
 import theme.Spacing
 import utils.*

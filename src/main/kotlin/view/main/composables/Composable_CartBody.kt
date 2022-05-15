@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import pab.lop.illustrashopandroid.data.model.product_shopping.product_shopping_response
+import data.model.product_shopping.product_shopping_response
 import utils.currentShoppingProducts
 
 @OptIn(ExperimentalFoundationApi::class)
