@@ -15,7 +15,7 @@ import pab.lop.illustrashopandroid.data.model.product_stock.product_stock_respon
 import pab.lop.illustrashopandroid.data.model.shoppin.shopping_cart_request
 import pab.lop.illustrashopandroid.data.model.shopping_cart.shopping_cart_response
 import pab.lop.illustrashopandroid.data.model.user.user_request
-import pab.lop.illustrashopandroid.utils.URL_HEAD_API
+import utils.URL_HEAD_API
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit

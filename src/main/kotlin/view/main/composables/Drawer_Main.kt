@@ -1,6 +1,7 @@
 package pab.lop.illustrashopandroid.ui.view.main.composables
 
 
+import ScreenNav
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,8 +18,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import pab.lop.illustrashopandroid.utils.*
 import theme.Spacing
+import utils.isEditionMode
+import utils.userDefaultNoAuth
+import utils.userSelected
+import utils.wishlistProducts
 import view.main.MainViewModel
 
 @Composable
@@ -121,8 +125,14 @@ fun MainDrawer(
                 .background(brush = verticalGradientDisabled)
                 .padding(12.dp)
                 .clickable(onClick = {
-                    if (userSelected == userDefaultNoAuth) screen.value = ScreenNav.LoginScreen.route
-                    else screen.value = ScreenNav.LoginScreen.route
+                    if (userSelected == userDefaultNoAuth){
+                        isEditionMode = false
+                        screen.value = ScreenNav.RegisterScreen.route
+                    }
+                    else{
+                        isEditionMode = true
+                        screen.value = ScreenNav.RegisterScreen.route
+                    }
                 })
         )
 
@@ -143,7 +153,8 @@ fun MainDrawer(
                     .clickable(onClick = {
                         mainViewModel.getAllProductStock(userSelected!!.wishlist){
                             wishlistProducts = mainViewModel.productListResponse
-                            screen.value = ScreenNav.LoginScreen.route                        }
+                            screen.value = ScreenNav.WishScreen.route
+                        }
                     })
             )
 
@@ -160,7 +171,7 @@ fun MainDrawer(
                     .background(brush = verticalGradientDisabled)
                     .padding(12.dp)
                     .clickable(onClick = {
-                        /*if (userSelected!!.rol.uppercase() == "ADMIN") {
+                       /* *//*if (userSelected!!.rol.uppercase() == "ADMIN") {
                             adminViewModel.getOrders() {
                                 allOrders = adminViewModel.allOrdersResponse as MutableList<order_response>
                                 navController.navigate(ScreenNav.OrderScreen.withArgs(true))
@@ -188,7 +199,7 @@ fun MainDrawer(
                     .clip(RoundedCornerShape(4.dp))
                     .background(brush = verticalGradientDisabled)
                     .padding(12.dp)
-                    .clickable(onClick = { screen.value = ScreenNav.LoginScreen.route })
+                    .clickable(onClick = { screen.value = ScreenNav.LoginScreen.route /*TODO MENU ADMIN*/ })
             )
         }
 

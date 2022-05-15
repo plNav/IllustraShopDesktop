@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 
 import pab.lop.illustrashopandroid.data.model.product_stock.product_stock_response
 
-import pab.lop.illustrashopandroid.utils.excludedFamilies
+import utils.excludedFamilies
 import view.main.composables.ImageContent
 
 @Composable

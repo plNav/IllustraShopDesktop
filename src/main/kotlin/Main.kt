@@ -12,10 +12,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.singleWindowApplication
+import pab.lop.illustrashopandroid.ui.view.login_register.composables.Register
 import view.main.composables.Main
 import view.login_register.composables.Login
 import theme.IllustraShopAndroidTheme
+import utils.Reload
 import utils.Toast
+import view.main.composables.ShoppingCart
+import view.main.composables.WishList
 
 val message: MutableState<String> = mutableStateOf("")
 val state: MutableState<Boolean> = mutableStateOf(false)
@@ -37,6 +41,9 @@ fun App() {
             ScreenNav.LoginScreen.route -> Login(screen)
             ScreenNav.RegisterScreen.route -> Register(screen)
             ScreenNav.MainScreen.route -> Main(screen)
+            ScreenNav.WishScreen.route -> WishList(screen)
+            ScreenNav.ShoppingCartScreen.route -> ShoppingCart(screen)
+            ScreenNav.ReloadScreen.route -> Reload(screen)
         }
     }
 }
@@ -48,32 +55,5 @@ fun main() = singleWindowApplication(
     )
 ){
         App()
-}
-
-/*
-@Composable
-fun Login(screen: MutableState<String>) {
-    Column {
-        Text("Login")
-        Button(onClick = {
-            screen.value = ScreenNav.RegisterScreen.route
-
-        } ){
-            Text("to register")
-        }
-    }
-}
-*/
-
-@Composable
-fun Register(screen: MutableState<String>) {
-    Column {
-        Text("Register")
-        Button(onClick = {
-            screen.value = ScreenNav.LoginScreen.route
-        } ){
-            Text("to Login")
-        }
-    }
 }
 

@@ -1,4 +1,4 @@
-package pab.lop.illustrashopandroid.utils
+package utils
 
 import pab.lop.illustrashopandroid.data.model.family.family_response
 import pab.lop.illustrashopandroid.data.model.order.order_response
@@ -20,11 +20,14 @@ const val PENDING = "PENDING"
 const val SENT = "SENT"
 const val ENDED = "ENDED"
 
+var rememberScreen = ""
+var isEditionMode = false
 var familyProducts: HashMap<String, List<product_stock_response>> = hashMapOf()
 var excludedFamilies : MutableList<String> = mutableListOf("SecondFamily")
 var familyNameList : MutableList<String> = mutableListOf()
 
 val regexSpecialChars = Regex("[^A-Za-z0-9 ]")
+val regexEmail = Regex("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+")
 
 var productSelected : product_stock_response? = null
 var familySelected : family_response? = null

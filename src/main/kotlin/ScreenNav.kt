@@ -16,4 +16,6 @@ sealed class ScreenNav(val route: String) {
 
     object PersonalInfoScreen : ScreenNav("personal_info_screen")
 
+    object ReloadScreen : ScreenNav("reload_screen")
+
 }

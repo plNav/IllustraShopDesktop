@@ -30,13 +30,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import view.login_register.LoginRegisterViewModel
-import pab.lop.illustrashopandroid.utils.shoppingCartSelected
-import pab.lop.illustrashopandroid.utils.userSelected
+import utils.shoppingCartSelected
+import utils.userSelected
 import showToast
 import theme.Spacing
-import utils.Toast
-
-
+import utils.isEditionMode
 
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -222,7 +220,10 @@ fun Login(screen: MutableState<String>) {
         /************ REGISTER ************/
         Button(
             elevation = ButtonDefaults.elevation(0.dp),
-            onClick = { screen.value = ScreenNav.RegisterScreen.route},
+            onClick = {
+                isEditionMode = false
+                screen.value = ScreenNav.RegisterScreen.route
+                      },
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = Color.Transparent,
                 contentColor = Color(0xFFFFF5EE),

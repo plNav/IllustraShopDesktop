@@ -12,8 +12,8 @@ import pab.lop.illustrashopandroid.data.model.product_stock.product_stock_respon
 import pab.lop.illustrashopandroid.ui.view.main.composables.Body
 import pab.lop.illustrashopandroid.ui.view.main.composables.MainDrawer
 import view.main.MainViewModel
-import pab.lop.illustrashopandroid.utils.*
 import theme.Spacing
+import utils.*
 
 
 @Composable
@@ -84,7 +84,6 @@ fun Main(
 
     if (popUpDetailsOpen.value) {
         PopUpDetails(
-            scope = scope,
             popUpDetailsOpen = popUpDetailsOpen,
             verticalGradient = verticalGradient,
             addShoppingCart = addShoppingCart,

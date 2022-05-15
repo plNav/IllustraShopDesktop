@@ -14,10 +14,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import pab.lop.illustrashopandroid.utils.currentShoppingProducts
-import pab.lop.illustrashopandroid.utils.shoppingCartSelected
-import pab.lop.illustrashopandroid.utils.userDefaultNoAuth
-import pab.lop.illustrashopandroid.utils.userSelected
+import utils.currentShoppingProducts
+import utils.shoppingCartSelected
+import utils.userDefaultNoAuth
+import utils.userSelected
 import showToast
 
 import view.main.MainViewModel
@@ -62,9 +62,9 @@ fun TopAppBar(
                     else mainViewModel.getAllProductShopping(shoppingCartSelected!!._id) {
                         currentShoppingProducts = mainViewModel.currentProductsShopping.toMutableList()
                         var hasToBuy = false
-                        currentShoppingProducts.forEach{product -> if(!product.bought)hasToBuy = true }
+                        currentShoppingProducts.forEach{ product -> if(!product.bought)hasToBuy = true }
                         if (currentShoppingProducts.isEmpty() || !hasToBuy) {showToast("Shopping Cart Empty")}
-                        else screen.value = ScreenNav.LoginScreen.route
+                        else screen.value = ScreenNav.ShoppingCartScreen.route
                     }
                 }
             ) {

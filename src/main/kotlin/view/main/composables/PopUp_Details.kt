@@ -24,19 +24,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
-import kotlinx.coroutines.CoroutineScope
 import pab.lop.illustrashopandroid.data.model.product_shopping.product_shopping_request
-import pab.lop.illustrashopandroid.utils.*
 import showToast
 import theme.Spacing
-import utils.AsyncImage
-import utils.loadImageBitmap
+import utils.*
 import view.main.MainViewModel
 
 
 @Composable
 fun PopUpDetails(
-    scope: CoroutineScope,
     popUpDetailsOpen: MutableState<Boolean>,
     verticalGradient: Brush,
     addShoppingCart: MutableState<Boolean>,
@@ -95,7 +91,6 @@ fun PopUpDetails(
                 modifier = Modifier
                     .background(brush = verticalGradient)
                     .clip(RoundedCornerShape(10.dp))
-                    .background(verticalGradient)
             ) {
                 Row(
                     modifier = Modifier
