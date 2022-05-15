@@ -18,11 +18,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import data.model.order.order_response
 import theme.Spacing
-import utils.isEditionMode
-import utils.userDefaultNoAuth
-import utils.userSelected
-import utils.wishlistProducts
+import utils.*
+import view.admin.AdminViewModel
+import view.admin.composables.Admin_Screen
 import view.main.MainViewModel
 
 @Composable
@@ -171,17 +171,18 @@ fun MainDrawer(
                     .background(brush = verticalGradientDisabled)
                     .padding(12.dp)
                     .clickable(onClick = {
-                       /* *//*if (userSelected!!.rol.uppercase() == "ADMIN") {
+                        val adminViewModel = AdminViewModel()
+                        if (userSelected!!.rol.uppercase() == "ADMIN") {
                             adminViewModel.getOrders() {
                                 allOrders = adminViewModel.allOrdersResponse as MutableList<order_response>
-                                navController.navigate(ScreenNav.OrderScreen.withArgs(true))
+                                screen.value = ScreenNav.OrderScreen.route
                             }
                         } else {
                             adminViewModel.getUserOrders(userId = userSelected!!._id) {
                                 allOrders = adminViewModel.allOrdersResponse as MutableList<order_response>
-                                navController.navigate(ScreenNav.OrderScreen.withArgs(false))
+                                screen.value = ScreenNav.OrderScreen.route
                             }
-                        }*/
+                        }
                     })
             )
         }
@@ -199,7 +200,7 @@ fun MainDrawer(
                     .clip(RoundedCornerShape(4.dp))
                     .background(brush = verticalGradientDisabled)
                     .padding(12.dp)
-                    .clickable(onClick = { screen.value = ScreenNav.LoginScreen.route /*TODO MENU ADMIN*/ })
+                    .clickable(onClick = { screen.value = ScreenNav.AdminScreen.route })
             )
         }
 
