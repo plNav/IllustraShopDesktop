@@ -26,17 +26,16 @@ import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import data.model.order.order_request
 import data.model.product_shopping.product_shopping_response
-import okhttp3.HttpUrl.Companion.toHttpUrl
+import showToast
 import theme.Spacing
 import utils.currentShoppingProducts
 import utils.rememberScreen
+import utils.shoppingCartSelected
 import utils.userSelected
 import view.main.MainViewModel
 import java.awt.Desktop
 import java.net.URI
-import java.net.URISyntaxException
 import java.util.*
-
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -151,8 +150,14 @@ fun ShoppingCart(
                                // uriPopUpOpen.value = true
                                 openInBrowser(URI(mainViewModel.currentPayPalresponse))
                                 //openWebpage("http://www.google.com".toHttpUrl())
-                               // screen.value = ScreenNav.MainScreen.route
-
+                                mainViewModel.getAllProductShopping(shoppingCartSelected!!._id) {
+                                    currentShoppingProducts = mainViewModel.currentProductsShopping.toMutableList()
+                                    var hasToBuy = false
+                                    currentShoppingProducts.forEach { product -> if (!product.bought) hasToBuy = true }
+                                    if (currentShoppingProducts.isEmpty() || !hasToBuy) {
+                                        showToast("See your Product Status \n  in Options > Orders")
+                                    } else screen.value = ScreenNav.ShoppingCartScreen.route
+                                }
                             }
                         }
                     })

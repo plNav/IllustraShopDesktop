@@ -46,7 +46,7 @@ fun MainDrawer(
 
         Card(
             border = BorderStroke(2.dp, Color.DarkGray),
-            modifier = Modifier.background(Color.Transparent),
+            modifier = Modifier.background(Color.Transparent).padding(0.dp, 0.dp, 20.dp, 0.dp),
             shape = RoundedCornerShape(15.dp),
             elevation = 20.dp
         ) {

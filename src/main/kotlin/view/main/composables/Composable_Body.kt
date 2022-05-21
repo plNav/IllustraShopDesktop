@@ -13,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -28,6 +29,8 @@ import androidx.compose.ui.unit.sp
 
 import data.model.product_stock.product_stock_response
 import kotlinx.coroutines.launch
+import theme.GrayDisabled
+import theme.GrayDisabledLight
 import theme.Spacing
 
 import utils.excludedFamilies
@@ -44,7 +47,9 @@ fun Body(
         endY = 100f
     )
 
-    LazyColumn{
+    LazyColumn(
+        modifier = Modifier.background(verticalGradientDisabled),
+    ){
         itemsIndexed(familyProducts.keys.toMutableList()) { index, family ->
             Column(
                 modifier = Modifier
@@ -92,7 +97,7 @@ fun Body(
                             modifier = Modifier.background(verticalGradientDisabled)
                         ) {
                             for (p in row) {
-                                Box {
+                                Box{
                                     ImageContent(
                                         product = p,
                                         familyProducts = familyProducts,

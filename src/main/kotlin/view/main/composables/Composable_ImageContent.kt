@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.unit.dp
 import data.model.product_stock.product_stock_response
+import theme.GrayDisabledLight
 import utils.URL_HEAD_IMAGES
 import utils.productSelected
 
@@ -29,7 +30,7 @@ fun ImageContent(
     index: Int,
     popUpDetailsOpen: MutableState<Boolean>
 ) {
-    val verticalGradientDisabled = Brush.verticalGradient(
+    Brush.verticalGradient(
         colors = listOf(MaterialTheme.colors.onError, Color.DarkGray),
         startY = 0f,
         endY = 100f
@@ -43,66 +44,14 @@ fun ImageContent(
             })
 
     ) {
-
             AsyncImage(
                 load = { loadImageBitmap("$URL_HEAD_IMAGES${product.image}") },
                 painterFor = { remember { BitmapPainter(it) } },
                 contentDescription = "Sample",
-                modifier = Modifier.width(200.dp).height(300.dp)
+                modifier = Modifier.width(200.dp).height(300.dp).background(Color.Black).padding(5.dp)
+
             )
-
-
-
-
-
-      /*  Image(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data("$URL_HEAD_IMAGES${familyProducts.get(family)?.get(page)?.image}")
-                .crossfade(true)
-                .crossfade(1000)
-                .build(),
-            loading = { CircularProgressIndicator() },
-            contentDescription = familyProducts.get(family)?.get(page)?.image,
-            contentScale = ContentScale.Crop,
-            error = {
-                Image(
-                    painter = painterResource(id = R.drawable.loading_image),
-                    contentDescription = stringResource(R.string.error),
-                )
-            },
-        )*/
-        /*      AsyncImage(
-                  model = ImageRequest.Builder(LocalContext.current)
-                      .data("$URL_HEAD_IMAGES${familyProducts.get(family)?.get(page)?.image}")
-                      .crossfade(true)
-                      .crossfade(1000)
-                      .build(),
-                  contentDescription = null,
-
-                  //placeholder = painterResource(id = R.drawable.loading_image),
-                  //   modifier = Modifier.fillMaxSize(0.8f)
-              )*/
-
-
-
     }
 }
-
-/*
-fun loadNetworkImage(link: String): ImageBitmap {
-    val url = URL(link)
-    val connection = url.openConnection() as HttpURLConnection
-    connection.connect()
-
-    val inputStream = connection.inputStream
-    val bufferedImage = ImageIO.read(inputStream)
-
-    val stream = ByteArrayOutputStream()
-    ImageIO.write(bufferedImage, "jpg", stream)
-    val byteArray = stream.toByteArray()
-    val image = org.jetbrains.skia.Image.makeFromEncoded(byteArray).asImageBitmap()
-    return image
-}
-*/
 
 

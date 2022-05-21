@@ -1,7 +1,9 @@
 package view.main.composables
 
+import androidx.compose.foundation.background
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
@@ -9,6 +11,7 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import kotlinx.coroutines.CoroutineScope
 import data.model.product_stock.product_stock_response
+import theme.GrayDisabled
 import view.main.MainViewModel
 import theme.Spacing
 import utils.*
