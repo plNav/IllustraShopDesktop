@@ -30,6 +30,7 @@ fun ImageContent(
     index: Int,
     popUpDetailsOpen: MutableState<Boolean>
 ) {
+
     Brush.verticalGradient(
         colors = listOf(MaterialTheme.colors.onError, Color.DarkGray),
         startY = 0f,
@@ -44,11 +45,13 @@ fun ImageContent(
             })
 
     ) {
+
             AsyncImage(
                 load = { loadImageBitmap("$URL_HEAD_IMAGES${product.image}") },
                 painterFor = { remember { BitmapPainter(it) } },
                 contentDescription = "Sample",
                 modifier = Modifier.width(200.dp).height(300.dp).background(Color.Black).padding(5.dp)
+
 
             )
     }
