@@ -29,6 +29,8 @@ class MainViewModel {
     var currentProductShoppingResponse : product_shopping_response? by mutableStateOf(null)
     var productStockResponse : product_stock_response? by mutableStateOf(null)
     var productListResponse : MutableList<product_stock_response> by mutableStateOf(mutableListOf())
+    var currentPayPalresponse : String by mutableStateOf("")
+
 
 
     private var errorMessage: String by mutableStateOf("")
@@ -265,8 +267,13 @@ class MainViewModel {
         val apiServices = ApiServices.getInstance()
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                val response: Response<Any> = apiServices.createOrder(order)
+                order.status = "UNPAID"
+                val response: Response<Any> = apiServices.createOrder(
+                    pay = order.total,
+                    order = order
+                )
                 if (response.isSuccessful) {
+                    currentPayPalresponse = response.body().toString()
                     onSuccessCallback()
                 }
             } catch (e: Exception) {

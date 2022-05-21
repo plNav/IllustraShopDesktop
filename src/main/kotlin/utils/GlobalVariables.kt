@@ -19,6 +19,7 @@ const val TEST_INTERSTITIAL : String = "ca-app-pub-3940256099942544/1033173712"
 const val PENDING = "PENDING"
 const val SENT = "SENT"
 const val ENDED = "ENDED"
+const val UNPAID = "UNPAID"
 
 var rememberScreen = ""
 var isEditionMode = false

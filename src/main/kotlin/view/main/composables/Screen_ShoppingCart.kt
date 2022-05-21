@@ -8,20 +8,35 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowPosition
+import androidx.compose.ui.window.rememberWindowState
 import data.model.order.order_request
 import data.model.product_shopping.product_shopping_response
-import utils.currentShoppingProducts
-import utils.userSelected
+import okhttp3.HttpUrl.Companion.toHttpUrl
 import theme.Spacing
+import utils.currentShoppingProducts
+import utils.rememberScreen
+import utils.userSelected
 import view.main.MainViewModel
+import java.awt.Desktop
+import java.net.URI
+import java.net.URISyntaxException
+import java.util.*
+
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -32,6 +47,7 @@ fun ShoppingCart(
     val isSaved = remember { mutableStateOf(true) }
     val currentLine = remember { mutableStateOf<product_shopping_response?>(null) }
     val openPopUpEdition = remember { mutableStateOf(false) }
+    val uriPopUpOpen = remember {mutableStateOf(false)}
 
     val total = remember { mutableStateOf(0f) }
 
@@ -63,6 +79,15 @@ fun ShoppingCart(
             currentLine = currentLine,
             isSaved = isSaved,
             screen = screen
+        )
+    }
+
+    if (uriPopUpOpen.value){
+        PopUpUrl(
+            screen = screen,
+            customSpacing = customSpacing,
+            isPopUpUrlOpen = uriPopUpOpen,
+            verticalGradient = verticalGradient
         )
     }
 
@@ -113,20 +138,20 @@ fun ShoppingCart(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable(onClick = {
-                        //TODO VALIDACION DE PAGO - COMPRA
 
                         val order = order_request(
                             user = userSelected!!,
-                            products = currentShoppingProducts,
+                            products = currentShoppingProducts.filter { !it.bought },
                             total = total.value,
                             status = "PENDING"
                         )
 
                         mainViewModel.createOrder(order) {
                             mainViewModel.markBoughtProducts(currentShoppingProducts) {
-                                //linkToWebpage(currentContext)
-                                //TODO OPEN PAYPAL.COM
-                                screen.value = ScreenNav.MainScreen.route
+                               // uriPopUpOpen.value = true
+                                openInBrowser(URI(mainViewModel.currentPayPalresponse))
+                                //openWebpage("http://www.google.com".toHttpUrl())
+                               // screen.value = ScreenNav.MainScreen.route
 
                             }
                         }
@@ -151,12 +176,138 @@ fun ShoppingCart(
     }
 }
 
-/*fun linkToWebpage(context: Context) {
-    val openURL = Intent(Intent.ACTION_VIEW)
-    openURL.data = Uri.parse("https://www.paypal.com/")
-    startActivity(context, openURL, null)
-}*/
+@Composable
+fun PopUpUrl(
+    screen: MutableState<String>,
+    customSpacing: Spacing,
+    isPopUpUrlOpen: MutableState<Boolean>,
+    verticalGradient: Brush
+){
+    Window(
+        onCloseRequest = { isPopUpUrlOpen.value = false },
+        state = rememberWindowState(
+            width = 500.dp,
+            height = 1000.dp,
+            position = WindowPosition(alignment = Alignment.Center)
+        ),
+        title = "Adaptive",
+        resizable = false,
+        undecorated = true,
+        transparent = true,
+        alwaysOnTop = true,
+        focusable = true
+    ) {
+        Surface(
+            shape = RoundedCornerShape(10.dp),
+            color = Color.Transparent,
+        ) {
+            Column(
+                modifier = Modifier
+                    .wrapContentHeight()
+                    .background(brush = verticalGradient)
+                    .clip(RoundedCornerShape(10.dp))
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(brush = verticalGradient)
+                ) {
 
+                    /*********** TITLE ***********/
+                    Text(
+                        text = "CLICK IN THE LINK TO PAY WITH PAYPAL",
+                        textAlign = TextAlign.Start,
+                        style = MaterialTheme.typography.body1.copy(color = Color.White),
+                        modifier = Modifier
+                            .fillMaxWidth(0.85f)
+                            .clip(RoundedCornerShape(4.dp))
+                            .background(Color.Transparent)
+                            .padding(12.dp)
+                            .clickable(onClick = { })
+                    )
+
+
+
+                    /*********** CLOSE ***********/
+                    IconButton(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(4.dp))
+                            .background(Color.Transparent),
+                        onClick = {
+                            isPopUpUrlOpen.value = false
+
+                        },
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.Close,
+                            tint = MaterialTheme.colors.onSecondary,
+                            contentDescription = null
+                        )
+                    }
+                }
+
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+
+                    Text("http://www.google.com")
+
+                    Spacer(modifier = Modifier.height(customSpacing.small))
+
+
+                }
+
+                Button(onClick = {  }) {
+                    Text(
+                        text = "Open a link",
+                        color = Color.Black
+                    )
+                }
+
+
+
+                /*********** OK ***********/
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable(onClick = {
+
+                                rememberScreen = ScreenNav.ShoppingCartScreen.route
+                                screen.value = ScreenNav.ReloadScreen.route
+                            }
+
+                        )
+                ) {
+
+                    Text(
+                        text = "OK",
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.body1.copy(color = Color.White),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(4.dp))
+                            .background(brush = verticalGradient)
+                            .padding(12.dp)
+                    )
+                }
+            }
+        }
+    }
+}
+
+fun openInBrowser(uri: URI) {
+    val osName by lazy(LazyThreadSafetyMode.NONE) { System.getProperty("os.name").lowercase(Locale.getDefault()) }
+    val desktop = Desktop.getDesktop()
+    when {
+        Desktop.isDesktopSupported() && desktop.isSupported(Desktop.Action.BROWSE) -> desktop.browse(uri)
+        "mac" in osName -> Runtime.getRuntime().exec("open $uri")
+        "nix" in osName || "nux" in osName -> Runtime.getRuntime().exec("xdg-open $uri")
+        else -> throw RuntimeException("cannot open $uri")
+    }
+}
 
 
 

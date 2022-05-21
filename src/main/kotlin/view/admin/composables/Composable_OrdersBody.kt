@@ -19,10 +19,7 @@ import theme.GreenEnd
 import theme.RedPending
 import theme.Spacing
 import theme.YellowSent
-import utils.ENDED
-import utils.PENDING
-import utils.SENT
-import utils.allOrders
+import utils.*
 
 @Composable
 fun Orders(
@@ -64,7 +61,8 @@ fun Orders(
                 backgroundColor = when (item.status) {
                     PENDING -> RedPending
                     SENT -> YellowSent
-                    else -> GreenEnd
+                    ENDED -> GreenEnd
+                    else -> Color.Red
                 }
             ) {
                 Row(
@@ -82,7 +80,8 @@ fun Orders(
                         when (item.status.uppercase()) {
                             PENDING -> pending
                             SENT -> sent
-                            else -> finished
+                            ENDED -> finished
+                            else -> UNPAID
                         }
                     )
                     Icon(Icons.Filled.Edit, contentDescription = null, tint = Color.Black)
