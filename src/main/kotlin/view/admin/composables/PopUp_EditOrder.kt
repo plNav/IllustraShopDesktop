@@ -58,7 +58,7 @@ fun PopUp_EditOrder(
         onCloseRequest = { isEditOpen.value = false },
         state = rememberWindowState(
             width = 500.dp,
-            height = 1200.dp,
+            height = 1000.dp,
             position = WindowPosition(alignment = Alignment.Center)
         ),
         title = "Adaptive",
@@ -112,11 +112,7 @@ fun PopUp_EditOrder(
                     }
                 }
 
-                Spacer(
-                    modifier = Modifier.height(
-                        customSpacing.mediumSmall
-                    )
-                )
+
 
                 /************ USER INFO ************/
 
@@ -135,7 +131,7 @@ fun PopUp_EditOrder(
                             textStyle = TextStyle(color = Color.Black, fontWeight = FontWeight.Bold),
                             modifier = Modifier
                                 .padding(20.dp)
-                                .height(200.dp)
+                                .height(100.dp)
                                 .fillMaxWidth()
                         )
                     }
@@ -201,10 +197,6 @@ fun PopUp_EditOrder(
                         }
                     }
                 }
-
-
-                /************ OPTIONS ************/
-
 
                 /************ OPTIONS ************/
 
