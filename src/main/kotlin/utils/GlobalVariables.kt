@@ -6,6 +6,7 @@ import data.model.product_shopping.product_shopping_response
 import data.model.product_stock.product_stock_response
 import data.model.shopping_cart.shopping_cart_response
 import data.model.user.user_response
+import pab.lop.illustrashopandroid.data.model.analytics.analytics_response
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -38,6 +39,7 @@ var currentShoppingProducts : MutableList<product_shopping_response> = mutableLi
 var allOrders : MutableList<order_response> = mutableListOf()
 var userOrders : MutableList<order_response> = mutableListOf()
 var wishlistProducts : MutableList<product_stock_response> = mutableListOf()
+var analytics : analytics_response = analytics_response("", 0, 0, 0.0f)
 
 val userDefaultNoAuth = user_response(
     _id = "",

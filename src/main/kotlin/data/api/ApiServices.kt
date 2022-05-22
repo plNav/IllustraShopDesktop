@@ -15,6 +15,7 @@ import data.model.product_stock.product_stock_response
 import data.model.shopping_cart.shopping_cart_request
 import data.model.shopping_cart.shopping_cart_response
 import data.model.user.user_request
+import pab.lop.illustrashopandroid.data.model.analytics.analytics_response
 import utils.URL_HEAD_API
 import retrofit2.Call
 import retrofit2.Response
@@ -172,6 +173,12 @@ interface ApiServices {
 
     @GET("order/{id}")
     suspend fun getUserOrders(@Path(value = "id") id: String): Response<List<order_response>>
+
+
+    /********************ANALYTICS**********************/
+    @GET("analytics")
+    suspend fun getAnalytics(): Response<analytics_response>
+
 
 
 }

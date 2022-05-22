@@ -26,6 +26,7 @@ import androidx.compose.ui.window.rememberWindowState
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import theme.GrayDisabledLight
 
 enum class ToastDuration(val value: Int) {
     Short(1000), Long(3000)
@@ -44,7 +45,7 @@ fun Toast(
     }
 
     val verticalGradientDisabled = Brush.verticalGradient(
-        colors = listOf(MaterialTheme.colors.onError, Color.DarkGray),
+        colors = listOf(MaterialTheme.colors.onError, GrayDisabledLight),
         startY = 0f,
         endY = 100f
     )

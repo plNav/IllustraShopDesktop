@@ -15,10 +15,8 @@ import view.login_register.composables.Login
 import theme.IllustraShopAndroidTheme
 import utils.Reload
 import utils.Toast
-import view.admin.composables.Admin_Screen
-import view.admin.composables.Edit_Product
-import view.admin.composables.Image_Upload
-import view.admin.composables.OrderStart
+import view.admin.composables.*
+import view.login_register.composables.InterstitialAdd
 import view.main.composables.ShoppingCart
 import view.main.composables.WishList
 
@@ -47,6 +45,9 @@ fun App() {
             ScreenNav.ImageUploadScreen.route -> Image_Upload(screen)
             ScreenNav.ProductEditScreen.route -> Edit_Product(screen)
             ScreenNav.AdminScreen.route -> Admin_Screen(screen)
+            ScreenNav.AnalyticsScreen.route -> Analytics(screen)
+            ScreenNav.FamilyEditScreen.route -> PopUp_Edit_Family(screen)
+            ScreenNav.InterstitialAdd.route -> InterstitialAdd(screen)
             ScreenNav.ReloadScreen.route -> Reload(screen)
         }
     }

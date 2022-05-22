@@ -13,6 +13,7 @@ import data.model.product_stock.product_stock_response
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import pab.lop.illustrashopandroid.data.model.analytics.analytics_response
 import retrofit2.Response
 
 
@@ -27,6 +28,8 @@ class AdminViewModel {
     var familyListResponse : List<family_response> by mutableStateOf(listOf())
     var updateOkResponse : Boolean by mutableStateOf(false)
     var allOrdersResponse : List<order_response> by mutableStateOf(listOf())
+    var analyticsResponse : analytics_response? by mutableStateOf(null)
+
 
     fun createFamily(family: family_request, onSuccessCallback: () -> Unit){
         val apiServices = ApiServices.getInstance()
@@ -372,6 +375,23 @@ class AdminViewModel {
                     allOrdersResponse = response.body()!!
                     onSuccessCallback()
                 }
+            } catch (e: Exception) {
+                errorMessage = e.message.toString()
+            }
+
+        }
+    }
+
+    fun getAnalytics(onSuccessCallback: () -> Unit) {
+        GlobalScope.launch {
+            val apiServices = ApiServices.getInstance()
+            try {
+                val response : Response<analytics_response> = apiServices.getAnalytics()
+                if (response.isSuccessful) {
+                    analyticsResponse = response.body()!!
+                    onSuccessCallback()
+                }
+
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
             }

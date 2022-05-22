@@ -23,12 +23,13 @@ import data.model.order.order_response
 import view.admin.AdminViewModel
 import theme.Spacing
 import utils.allOrders
+import utils.analytics
 import utils.familyNameList
 
 @Composable
 fun Admin_Screen(
-    screen : MutableState<String>
-){
+    screen: MutableState<String>
+) {
     val customSpacing = Spacing.customSpacing
     val adminViewModel = AdminViewModel()
 
@@ -65,7 +66,7 @@ fun Admin_Screen(
         )
     }
 
-    if(selectionProductOpen.value){
+    if (selectionProductOpen.value) {
         PopUp_Selection(
             screen = screen,
             adminViewModel = adminViewModel,
@@ -79,11 +80,11 @@ fun Admin_Screen(
         )
     }
 
-    if(selectionFamilyOpen.value){
+    if (selectionFamilyOpen.value) {
         PopUp_Selection(
             screen = screen,
             adminViewModel = adminViewModel,
-            selectionOpen = selectionProductOpen,
+            selectionOpen = selectionFamilyOpen,
             customSpacing = customSpacing,
             verticalGradient = verticalGradient,
             verticalGradientDisabled = verticalGradientDisabled,
@@ -233,6 +234,7 @@ fun Admin_Screen(
                 )
             )
 
+
             /************ REQUESTS ************/
             Text(
                 text = "ORDERS",
@@ -244,9 +246,33 @@ fun Admin_Screen(
                     .background(brush = verticalGradientDisabled)
                     .padding(12.dp)
                     .clickable(onClick = {
-                        adminViewModel.getOrders(){
+                        adminViewModel.getOrders() {
                             allOrders = adminViewModel.allOrdersResponse as MutableList<order_response>
                             screen.value = ScreenNav.OrderScreen.route
+                        }
+                    })
+            )
+
+            Spacer(
+                modifier = Modifier.height(
+                    customSpacing.extraLarge
+                )
+            )
+
+            /************ ANALYTICS ************/
+            Text(
+                text = "Analytics",
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.body1.copy(color = Color.White),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(4.dp))
+                    .background(brush = verticalGradientDisabled)
+                    .padding(12.dp)
+                    .clickable(onClick = {
+                        adminViewModel.getAnalytics() {
+                            analytics = adminViewModel.analyticsResponse!!
+                            screen.value = ScreenNav.AnalyticsScreen.route
                         }
                     })
             )
@@ -257,6 +283,11 @@ fun Admin_Screen(
                 )
             )
 
+            Spacer(
+                modifier = Modifier.height(
+                    customSpacing.large
+                )
+            )
 
 
         }

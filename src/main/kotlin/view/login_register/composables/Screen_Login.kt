@@ -252,7 +252,38 @@ fun Login(screen: MutableState<String>) {
         Spacer(modifier = Modifier.height(customSpacing.mediumLarge))
 
         /************NO REGISTER ************/
-        //TODO ENTER WITH NO REGISTER -> INTERSTICIAL ADD
+        Button(
+            elevation = ButtonDefaults.elevation(0.dp),
+            onClick = {
+                isEditionMode = false
+                screen.value = ScreenNav.InterstitialAdd.route
+            },
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Transparent,
+                contentColor = Color(0xFFFFF5EE),
+                disabledBackgroundColor = Color.Transparent,
+                disabledContentColor = Color.Transparent
+            ),
+            modifier = Modifier
+                .background(Color.Transparent)
+                .padding(customSpacing.default)
+
+        ) {
+            Text(
+                text = "Log without authentication",
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.ExtraBold,
+                color = Color.White,
+                style = MaterialTheme.typography.body1.copy(color = Color.White),
+                modifier = Modifier
+                    .clip(RoundedCornerShape(4.dp))
+                    .background(verticalGradient)
+                    .fillMaxWidth()
+                    .padding((customSpacing.small + customSpacing.extraSmall))
+            )
+        }
+
+        Spacer(modifier = Modifier.height(customSpacing.mediumLarge))
     }
 }
 

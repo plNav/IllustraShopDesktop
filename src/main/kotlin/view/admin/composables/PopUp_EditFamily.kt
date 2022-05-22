@@ -1,5 +1,6 @@
 package view.admin.composables
 
+import ScreenNav
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -7,6 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
@@ -24,9 +26,6 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.WindowPosition
-import androidx.compose.ui.window.rememberWindowState
 import view.admin.AdminViewModel
 import showToast
 import theme.Spacing
@@ -37,87 +36,59 @@ import utils.regexSpecialChars
 @Composable
 fun PopUp_Edit_Family(
     screen : MutableState<String>,
-    adminViewModel: AdminViewModel,
-    createFamilyOpen: MutableState<Boolean>,
-    customSpacing: Spacing,
-    verticalGradient: Brush,
-    verticalGradiendDisabled: Brush,
-    verticalGradientIncomplete: Brush
 ) {
+
+    val adminViewModel = AdminViewModel()
+    val customSpacing = Spacing.customSpacing
+    val scaffoldState = rememberScaffoldState()
+
     val customName = remember { mutableStateOf(familySelected?.name ?: "") }
     val nameVerified = remember { mutableStateOf(false) }
 
+    val verticalGradient = Brush.verticalGradient(
+        colors = listOf(MaterialTheme.colors.primary, MaterialTheme.colors.primaryVariant),
+        startY = 0f,
+        endY = 100f
+    )
+    val verticalGradientDisabled = Brush.verticalGradient(
+        colors = listOf(MaterialTheme.colors.onError, Color.DarkGray),
+        startY = 0f,
+        endY = 100f
+    )
 
-    Window(
-        onCloseRequest = { createFamilyOpen.value = false },
-        state = rememberWindowState(
-            width = 500.dp,
-            height = 1000.dp,
-            position = WindowPosition(alignment = Alignment.Center)
-        ),
-        title = "Adaptive",
-        resizable = false,
-        undecorated = true,
-        transparent = true,
-        alwaysOnTop = true,
-        focusable = true
+    val verticalGradientIncomplete = Brush.verticalGradient(
+        colors = listOf(MaterialTheme.colors.onSecondary, Color.DarkGray),
+        startY = 0f,
+        endY = 100f
+    )
+
+    Scaffold(
+        scaffoldState = scaffoldState,
+        topBar = {
+            EditFamilyTopAppBar(
+                verticalGradient = verticalGradient,
+                screen = screen
+            )
+        }
     ) {
-        Surface(
-            shape = RoundedCornerShape(10.dp),
-            color = Color.Transparent,
-        ) {
             Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .background(brush = verticalGradient)
+                    .fillMaxSize()
+                    .fillMaxSize()
                     .clip(RoundedCornerShape(10.dp))
             ) {
-                Row(
-                    horizontalArrangement = Arrangement.End,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(brush = verticalGradient)
-                ) {
 
-                    /************ TITLE ************/
-                    Text(
-                        text = "EDIT FAMILY",
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.body1.copy(color = Color.White),
-                        modifier = Modifier
-                            .fillMaxWidth(0.85f)
-                            .clip(RoundedCornerShape(4.dp))
-                            .background(Color.Transparent)
-                            .padding(12.dp)
-                            .clickable(onClick = { })
-                    )
-                    /************ CLOSE ************/
-                    IconButton(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(4.dp))
-                            .background(Color.Transparent),
-                        onClick = { createFamilyOpen.value = false },
-                    ) {
-                        Icon(
-                            Icons.Filled.Close,
-                            tint = MaterialTheme.colors.onSecondary,
-                            contentDescription = null
-                        )
-                    }
-                }
 
-                Spacer(
-                    modifier = Modifier.height(
-                        customSpacing.mediumSmall
-                    )
-                )
+
 
                 Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         //.fillMaxSize()
-                        .padding(horizontal = customSpacing.mediumSmall)
+                        .padding(horizontal = customSpacing.extraLarge)
 
                 ) {
 
@@ -176,7 +147,7 @@ fun PopUp_Edit_Family(
                     )
                     Spacer(
                         modifier = Modifier.height(
-                            customSpacing.mediumMedium
+                            customSpacing.extraLarge
                         )
                     )
 
@@ -188,12 +159,12 @@ fun PopUp_Edit_Family(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(4.dp))
-                            .background(brush = if (nameVerified.value) verticalGradient else verticalGradiendDisabled)
+                            .background(brush = if (nameVerified.value) verticalGradient else verticalGradientDisabled)
                             .padding(12.dp)
                             .clickable(onClick = {
                                 if (nameVerified.value) {
                                     adminViewModel.updateFamily(newName = customName.value, oldName = familySelected) {
-                                        createFamilyOpen.value = false
+                                        screen.value = ScreenNav.AdminScreen.route
                                     }
                                 }
                             })
@@ -201,7 +172,7 @@ fun PopUp_Edit_Family(
 
                     Spacer(
                         modifier = Modifier.height(
-                            customSpacing.mediumMedium
+                            customSpacing.extraLarge
                         )
                     )
 
@@ -217,7 +188,7 @@ fun PopUp_Edit_Family(
                             .padding(12.dp)
                             .clickable(onClick = {
                                 adminViewModel.deleteFamily(familySelected) {
-                                    createFamilyOpen.value = false
+                                    screen.value = ScreenNav.AdminScreen.route
                                 }
                             })
                     )
@@ -226,4 +197,31 @@ fun PopUp_Edit_Family(
             }
         }
     }
+
+@Composable
+private fun EditFamilyTopAppBar(verticalGradient: Brush, screen: MutableState<String>) {
+    TopAppBar(
+        elevation = 0.dp,
+        modifier = Modifier.background(verticalGradient),
+        backgroundColor = Color.Transparent,
+        title = {
+            Text(
+                text = "EDIT FAMILY : ${familySelected!!.name}",
+                style = MaterialTheme.typography.body1,
+                modifier = Modifier
+                    .padding(10.dp, 0.dp, 0.dp, 0.dp),
+                color = Color.White
+            )
+        },
+        navigationIcon = {
+            IconButton(
+                onClick = {
+                    screen.value = ScreenNav.AdminScreen.route
+                }) {
+                Icon(Icons.Filled.ArrowBack, contentDescription = null, tint = Color.White)
+            }
+        }
+    )
 }
+
+

@@ -195,8 +195,9 @@ fun PopUpDetails(
                                 mainViewModel.updateUserComplete(userSelected!!._id, userSelected!!) {
                                     mainViewModel.getAllProductStock(userSelected!!.wishlist) {
                                         wishlistProducts = mainViewModel.productListResponse
-                                        //navController.navigate(ScreenNav.WishScreen.route)
-                                        showToast("Added to wishlist")
+                                        showToast("Deleted")
+                                        popUpDetailsOpen.value = false
+
                                     }
                                 }
                             } else {
@@ -206,6 +207,7 @@ fun PopUpDetails(
                                     if (!isInWishList.value) {
                                         userSelected!!.wishlist.add(productSelected!!._id)
                                         mainViewModel.updateUserComplete(userSelected!!._id, userSelected!!) {
+                                            showToast("Added to WishList!")
                                             popUpDetailsOpen.value = false
                                         }
                                     } else {
