@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -49,6 +50,8 @@ fun ShoppingCart(
     val uriPopUpOpen = remember {mutableStateOf(false)}
 
     val total = remember { mutableStateOf(0f) }
+    val openPopUpComment = remember { mutableStateOf(false) }
+    val comment = remember { mutableStateOf("") }
 
 
     val mainViewModel = MainViewModel()
@@ -78,6 +81,15 @@ fun ShoppingCart(
             currentLine = currentLine,
             isSaved = isSaved,
             screen = screen
+        )
+    }
+    if (openPopUpComment.value) {
+        PopUpComment(
+            verticalGradient = verticalGradient,
+            openPopUpComment = openPopUpComment,
+            customSpacing = customSpacing,
+            comment = comment,
+            isOrders = false
         )
     }
 
@@ -132,6 +144,18 @@ fun ShoppingCart(
             }
             Spacer(modifier = Modifier.height(customSpacing.small))
 
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(5.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                ExtendedFloatingActionButtonExample(comment = comment, openPopUpComment = openPopUpComment)
+            }
+
+            Spacer(modifier = Modifier.height(customSpacing.small))
+
             /*** BUY NOW ***/
             Row(
                 modifier = Modifier
@@ -142,7 +166,8 @@ fun ShoppingCart(
                             user = userSelected!!,
                             products = currentShoppingProducts.filter { !it.bought },
                             total = total.value,
-                            status = "PENDING"
+                            status = "PENDING",
+                            comments = comment.value
                         )
 
                         mainViewModel.createOrder(order) {
@@ -313,6 +338,27 @@ fun openInBrowser(uri: URI) {
         else -> throw RuntimeException("cannot open $uri")
     }
 }
+
+@Composable
+fun ExtendedFloatingActionButtonExample(comment: MutableState<String>, openPopUpComment: MutableState<Boolean>) {
+    ExtendedFloatingActionButton(
+
+        text = {
+            Text(
+                text = if (comment.value.isEmpty()) "Add comment" else "Comment Added",
+                color = Color.White
+            )
+        },
+        onClick = { openPopUpComment.value = true },
+        icon = {
+            Icon(
+                imageVector =  Icons.Filled.Check,
+                tint = Color.White,
+                contentDescription = ""
+            )
+        })
+}
+
 
 
 

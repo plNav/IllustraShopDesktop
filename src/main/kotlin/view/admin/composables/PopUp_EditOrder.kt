@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.runtime.Composable
@@ -23,6 +24,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
@@ -33,6 +36,7 @@ import view.admin.AdminViewModel
 import theme.Spacing
 import theme.SurfaceAlmostBlack
 import utils.*
+import view.main.composables.PopUpComment
 import java.util.*
 
 @Composable
@@ -46,13 +50,15 @@ fun PopUp_EditOrder(
     isAdmin: Boolean
 ) {
 
+    val openPopUpComment = remember { mutableStateOf(false) }
+    val comment = remember { mutableStateOf(orderSelected.value!!.comments) }
     val filter = remember { mutableStateOf(orderSelected.value!!.status) }
 
     Window(
         onCloseRequest = { isEditOpen.value = false },
         state = rememberWindowState(
             width = 500.dp,
-            height = 1000.dp,
+            height = 1200.dp,
             position = WindowPosition(alignment = Alignment.Center)
         ),
         title = "Adaptive",
@@ -78,7 +84,6 @@ fun PopUp_EditOrder(
                         .fillMaxWidth()
                         .background(brush = verticalGradient)
                 ) {
-
 
                     /************ TITLE ************/
                     Text(
@@ -120,6 +125,22 @@ fun PopUp_EditOrder(
                         .fillMaxWidth()
                         .padding(customSpacing.small)
                 ) {
+                    /************ COMMENT ************/
+                    if (orderSelected.value!!.comments.isNotEmpty()) {
+                        TextField(
+                            enabled = false,
+                            value = "Comments: \n${orderSelected.value!!.comments}",
+                            onValueChange = { },
+                            maxLines = 5,
+                            textStyle = TextStyle(color = Color.Black, fontWeight = FontWeight.Bold),
+                            modifier = Modifier
+                                .padding(20.dp)
+                                .height(200.dp)
+                                .fillMaxWidth()
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(customSpacing.small))
+
                     Text(
                         style = MaterialTheme.typography.body2,
                         text = """

@@ -261,7 +261,7 @@ fun Admin_Screen(
 
             /************ ANALYTICS ************/
             Text(
-                text = "Analytics",
+                text = "ANALYTICS",
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.body1.copy(color = Color.White),
                 modifier = Modifier
