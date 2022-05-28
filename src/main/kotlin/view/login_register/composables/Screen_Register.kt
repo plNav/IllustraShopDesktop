@@ -71,7 +71,6 @@ fun Register(
     val passwordUpdate = remember { mutableStateOf(false) }
 
 
-    //Pay Fields //TODO PAY_METHOD & PAY_NUMBER
     val name = remember { mutableStateOf(if (isEditionMode) userSelected!!.name else "") }
     val nameChecked = remember {
         mutableStateOf(
@@ -168,7 +167,8 @@ fun Register(
             address = address,
             country = country,
             screen = screen,
-            loginRegisterViewModel = loginRegisterViewModel
+            loginRegisterViewModel = loginRegisterViewModel,
+            passwordUpdate = passwordUpdate
         )
     }
 

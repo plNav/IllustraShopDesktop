@@ -50,6 +50,7 @@ fun BasicInfo(
     val passwordMatchError = "Passwords must be equal"
     val emptyFieldError = "Field cannot be empty"
     val fieldOK = "Field correct"
+    val minPassword = "Password min 4 characters"
 
 
     val spaceBetweenFields = customSpacing.small
@@ -257,6 +258,7 @@ fun BasicInfo(
                         passwordVisibility.value = !passwordVisibility.value
                         when {
                             password1.value.isEmpty() || password2.value.isEmpty() -> showToast(emptyFieldError)
+                            password1.value.length < 4 -> showToast(minPassword)
                             password2.value == password1.value -> showToast(fieldOK)
                             else -> showToast(passwordMatchError)
                         }
@@ -287,7 +289,7 @@ fun BasicInfo(
             onValueChange = {
                 it.also {
                     password2.value = it
-                    passwordChecked.value = (password2.value == password1.value
+                    passwordChecked.value = (password2.value == password1.value && password1.value.length > 3
                             && (password1.value.isNotEmpty() && password2.value.isNotEmpty()))
                 }
             },
@@ -319,6 +321,7 @@ fun BasicInfo(
                         passwordVisibility.value = !passwordVisibility.value
                         when {
                             password1.value.isEmpty() || password2.value.isEmpty() -> showToast(emptyFieldError)
+                            password1.value.length < 4 -> showToast(minPassword)
                             password2.value == password1.value -> showToast(fieldOK)
                             else -> showToast(passwordMatchError)
                         }

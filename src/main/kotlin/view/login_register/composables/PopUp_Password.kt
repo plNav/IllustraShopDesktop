@@ -49,6 +49,7 @@ fun PopUpPassword(
     country: MutableState<String>,
     loginRegisterViewModel: LoginRegisterViewModel,
     screen: MutableState<String>,
+    passwordUpdate: MutableState<Boolean>,
 ) {
     val password = remember { mutableStateOf("") }
     val passwordVisibility = remember { mutableStateOf(false) }
@@ -191,10 +192,9 @@ fun PopUpPassword(
                             .clickable(onClick = {
                                 val passwordCyphered = getSHA256(password.value)
                                 if (passwordCyphered == userSelected!!.password) {
-                                    userSelected!!.password = passwordCyphered
-                                    // passwordValidated.value = true
-                                    userSelected!!.name = if (!allFields) "" else name.value
-                                    userSelected!!.last_name = if (!allFields) "" else lastName.value
+                                    userSelected!!.password = if (passwordUpdate.value) passwordCyphered else userSelected!!.password
+                                    userSelected!!.name = if (!allFields) userSelected!!.name else name.value
+                                    userSelected!!.last_name = if (!allFields) userSelected!!.last_name else lastName.value
                                     userSelected!!.username = username.value
                                     userSelected!!.email = email.value
                                     userSelected!!.phone = if (!allFields) userSelected!!.phone else phone.value
@@ -208,13 +208,13 @@ fun PopUpPassword(
                                             user = userSelected!!
                                         ) {
                                             screen.value = ScreenNav.MainScreen.route
-                                            showToast("Update Complete")
+                                            showToast("Update User Complete")
                                             popUpPasswordOpen.value = false
                                         }
                                     else
                                         loginRegisterViewModel.updateUserPartial(id = userSelected!!._id, user = userSelected!!) {
                                             screen.value = ScreenNav.MainScreen.route
-                                            showToast("Update Complete")
+                                            showToast("Update User Partial")
                                             popUpPasswordOpen.value = false
                                         }
 

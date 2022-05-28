@@ -170,18 +170,20 @@ fun ShoppingCart(
                             comments = comment.value
                         )
 
-                        mainViewModel.createOrder(order) {
-                            mainViewModel.markBoughtProducts(currentShoppingProducts) {
-                               // uriPopUpOpen.value = true
-                                openInBrowser(URI(mainViewModel.currentPayPalresponse))
-                                //openWebpage("http://www.google.com".toHttpUrl())
-                                mainViewModel.getAllProductShopping(shoppingCartSelected!!._id) {
-                                    currentShoppingProducts = mainViewModel.currentProductsShopping.toMutableList()
-                                    var hasToBuy = false
-                                    currentShoppingProducts.forEach { product -> if (!product.bought) hasToBuy = true }
-                                    if (currentShoppingProducts.isEmpty() || !hasToBuy) {
-                                        showToast("See your Product Status \n  in Options > Orders")
-                                    } else screen.value = ScreenNav.ShoppingCartScreen.route
+                        if(userSelected!!.address.isEmpty()){
+                            showToast("Register your pay info in options")
+                        }else{
+                            mainViewModel.createOrder(order) {
+                                mainViewModel.markBoughtProducts(currentShoppingProducts) {
+                                    openInBrowser(URI(mainViewModel.currentPayPalresponse))
+                                    mainViewModel.getAllProductShopping(shoppingCartSelected!!._id) {
+                                        currentShoppingProducts = mainViewModel.currentProductsShopping.toMutableList()
+                                        var hasToBuy = false
+                                        currentShoppingProducts.forEach { product -> if (!product.bought) hasToBuy = true }
+                                        if (currentShoppingProducts.isEmpty() || !hasToBuy) {
+                                            showToast("See your Product Status \n  in Options > Orders")
+                                        } else screen.value = ScreenNav.ShoppingCartScreen.route
+                                    }
                                 }
                             }
                         }
